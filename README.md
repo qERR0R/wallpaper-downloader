@@ -5,7 +5,9 @@ This Bash script allows you to easily download wallpapers from the Wallhaven sit
 Features:
 
 Search and download wallpapers from Wallhaven with ease.
+
 Specify search parameters such as resolution, category, and sorting options.
+
 Automatically download wallpapers to a specified directory on your machine.
 
 Usage:
