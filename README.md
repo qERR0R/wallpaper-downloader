@@ -1,6 +1,7 @@
 # Wallhaven Wallpaper Downloader
 
 This Bash script allows you to easily download wallpapers from the Wallhaven site directly to your local machine. Simply provide the script with the desired search parameters, and it will fetch high-quality wallpapers for you to use as backgrounds.
+
 Features:
 
 Search and download wallpapers from Wallhaven with ease.
