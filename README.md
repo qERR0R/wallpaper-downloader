@@ -11,8 +11,7 @@ Features:
 Usage:
 
 1. Clone the repository to your local machine.
-2. Make the script executable using chmod +x wallpaper_downloader.sh.
-3. Run the script with appropriate search parameters to download wallpapers.
+2. Run the script with appropriate search parameters to download wallpapers.
 
 Example:
 
