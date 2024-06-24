@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# Directory to store downloaded wallpapers
 walldir="${HOME}/Wallpapers/"
 mkdir -p "$walldir"
 count=0
 
-# Function to clean up and exit script
 cleanup() {
     if [ -n "$filename" ]; then
         rm -f "$walldir/$filename"
@@ -15,10 +13,8 @@ cleanup() {
     exit 1
 }
 
-# Trap interrupt signal to call cleanup function
 trap cleanup INT
 
-# Function to fetch search results from Wallhaven API
 get_results() {
     curl -s -G "https://wallhaven.cc/api/v1/search" \
         -d "q=$1" \
@@ -28,20 +24,40 @@ get_results() {
     jq -r '.data[]? | .path'
 }
 
-# Check if query is provided as argument
+help() {
+    printf "Usage: %s [options] <query> [<pages>]\n" "$0"
+    printf "Options:\n"
+    printf "  --help        Show this help message\n"
+    printf "  --target-file <file>  Specify a custom target file or directory\n"
+    printf "  Default target:  ~/Wallpapers"
+    exit 0
+}
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --help)
+            help
+            ;;
+        --target-file)
+            walldir="$2"
+            shift
+            ;;
+        *)
+            break
+            ;;
+    esac
+    shift
+done
+
 query="$1"
 [ -z "$query" ] && {
     printf "Query Not Specified\n" >&2
     exit 1
 }
-
-# Set default value for pages if not provided
 pages="${2:-1}"
 
-# Loop through pages to download wallpapers
 for ((page = 1; page <= pages; page++)); do
     printf "Page Load %d...\n" "$page"
-    # Read results from get_results function and process each URL
     while read -r url; do
         filename=$(basename "$url")
         if [ -e "$walldir/$filename" ]; then
